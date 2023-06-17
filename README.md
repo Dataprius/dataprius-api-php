@@ -112,7 +112,21 @@ Displays something like that:
 | ------------- | ------------- |
 | ListFolders($code,$page)  |   |
 | FolderInfo($code)  |  |
-| CreateFolder($parentFolder,$name)  | Throws an error if the folder already exists |
+| CreateFolder($parentFolder,$name)  | Throws an error if the folder already exists. Forbidden chars in Windows are not allowed. |
+| FolderRename($code,$newName)  | Throws an error if a folder with same name already exists. Forbidden chars in Windows are not allowed. |
+
+Forbidden chars in Windows
+<pre></pre>
+    < (less than)
+    > (greater than)
+    : (colon)
+    " (double quote)
+    / (forward slash)
+    \ (backslash)
+    | (vertical bar or pipe)
+    ? (question mark)
+    * (asterisk)
+</pre>
 
 
 # Demo
