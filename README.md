@@ -48,6 +48,36 @@ The response is a json object that correspons to something like that:
     }
 }
 </pre>
+### Listing subfolders inside folder
+First parameter is folder id, second paramer is page number.
+<pre><code>$json=$objApi->ListFolders("X3lXnB",1);</code></pre>
+Note that the parent folder is the root code for those folders. This allows you to implement the folder tree by making requests to subfolders.
+<pre>
+    {
+    "status": "ok",
+    "data": [
+        {
+            "ID": "gLw847",
+            "Parent": "X3lXnB",
+            "Name": "Invoices",
+            "Path": "Administration/Invoices"
+        },       
+        {
+            "ID": "aZ3ghk",
+            "Parent": "X3lXnB",
+            "Name": "Shared documents with group",
+            "Path": "Administration/Shared documents with group"
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "total_pages": 1,
+            "current_page": "1",
+            "total_results": 2
+        }
+    }
+}
+</pre>
 
 
 # Demo
