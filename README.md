@@ -116,7 +116,7 @@ Displays something like that:
 | FolderRename($code,$newName)  | Throws an error if a folder with same name already exists. Forbidden chars in Windows are not allowed. |
 
 Forbidden chars in Windows
-<pre></pre>
+<pre>
     < (less than)
     > (greater than)
     : (colon)
