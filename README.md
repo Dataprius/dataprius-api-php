@@ -93,15 +93,17 @@ try
 catch(Exception $e)
 {
     // Example retrieving error info.					
-    echo "This is the exception Message:" . $e->getMessage() . "<br>"; 
+    echo "This is the exception Message:" . $e->getMessage() . "<br>";
     $json=json_decode($e->getMessage());
     echo "This is the Json response message: " . $json->error->message;
 }    
 </pre>
 Displays something like that:
 <pre>
-    This is the exception Message: {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `Pollo`. The folder already exists."}}
-    This is the Json response message: Error creating folder: `MyFolder`. The folder already exists. 
+    **This is the exception Message:**
+    {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `Pollo`. The folder already exists."}}
+    *This is the Json response message:* 
+    Error creating folder: `MyFolder`. The folder already exists. 
 </pre>
 
 # Operations with Folders
