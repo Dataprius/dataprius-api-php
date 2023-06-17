@@ -114,6 +114,7 @@ Displays something like that:
 | FolderInfo($code)  |  |
 | CreateFolder($parentFolder,$name)  | Throws an error if the folder already exists. Forbidden chars in Windows are not allowed. |
 | FolderRename($code,$newName)  | Throws an error if a folder with same name already exists. Forbidden chars in Windows are not allowed. |
+| FolderDelete($code)  | The folder not permanently deleted. The folder goes to the recycle bin of the Dataprius account. |
 
 Forbidden chars in Windows
 <pre>
