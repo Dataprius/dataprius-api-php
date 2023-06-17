@@ -18,7 +18,36 @@ After that, you can see API Keys on the same window in Configuration.
 
 ### Create a connection
 <pre><code>$objApi = new DatapriusApi(API_CLIENT_ID_KEY,API_CLIENT_SECRET_KEY);</code></pre>
-
+### Listing folders on root
+First parameter is folder id, second paramer is page number. Root folder is an special case, it has the zero code.
+<pre><code>$json=$objApi->ListFolders("0",1);</code></pre>
+The response is a json object that correspons to something like that:
+<pre>
+    {
+    "status": "ok",
+    "data": [
+        {
+            "ID": "X3lXnB",
+            "Parent": "0",
+            "Name": "Administration",
+            "Path": "Administration"
+        },       
+        {
+            "ID": "6GlAKy",
+            "Parent": "0",
+            "Name": "Proyects",
+            "Path": "Proyects"
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "total_pages": 1,
+            "current_page": "1",
+            "total_results": 2
+        }
+    }
+}
+</pre>
 
 
 # Demo
