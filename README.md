@@ -80,10 +80,29 @@ Note that the parent folder is the root code for those folders. This allows you 
 </pre>
 
 ### Handling erros
-All requests to the api return a status field. This can be checked in the php file of the class.
+All requests to the api return a status field. You can check it in the php the class.
 The php class will throw an exception if an error has occurred.
-The format of an error json response is as follows
-<pre></pre>
+The internal format of an error json response is as follows
+<pre>{"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `MyFolder`. The folder already exists."}}</pre>
+For example, you can get error information from an Exception.
+<pre>
+try
+{
+    $objApi->CreateFolder($code,$name);
+}
+catch(Exception $e)
+{
+    // Example retrieving error info.					
+    echo "This is the exception Message:" . $e->getMessage() . "<br>"; 
+    $json=json_decode($e->getMessage());
+    echo "This is the Json response message: " . $json->error->message;
+}    
+</pre>
+Displays something like that:
+<pre>
+    This is the exception Message: {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `Pollo`. The folder already exists."}}
+    This is the Json response message: Error creating folder: `MyFolder`. The folder already exists. 
+</pre>
 
 # Operations with Folders
 
