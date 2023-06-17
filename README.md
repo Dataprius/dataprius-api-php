@@ -84,8 +84,8 @@ All requests to the api return a status field. You can check it in the php the c
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
 <pre>{"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `MyFolder`. The folder already exists."}}</pre>
-For example, you can get error information from an Exception.
-<pre>
+For example, you can get error information from an **Exception**.
+<pre><code>
 try
 {
     $objApi->CreateFolder($code,$name);
@@ -97,12 +97,12 @@ catch(Exception $e)
     $json=json_decode($e->getMessage());
     echo "This is the Json response message: " . $json->error->message;
 }    
-</pre>
+</code></pre>
 Displays something like that:
 <pre>
-    **This is the exception Message:**
-    {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `Pollo`. The folder already exists."}}
-    *This is the Json response message:* 
+    <b>This is the exception Message:</b>    
+    {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `MyFolder`. The folder already exists."}}
+    <b>This is the Json response message:</b>
     Error creating folder: `MyFolder`. The folder already exists. 
 </pre>
 
