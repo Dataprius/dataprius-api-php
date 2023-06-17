@@ -4,7 +4,7 @@ PHP client for the Dataprius API v.2
     PHP 5.3 or higher
     cURL
     Dataprius Account
-### Getting Started
+# Getting Started
 You will need a Dataprius account and API keys.
 If you do not have a Dataprius account, go to the website, download and install the free version. You can download from the web in english or spanish.
 - [Dataprius downloads in english]
@@ -78,6 +78,20 @@ Note that the parent folder is the root code for those folders. This allows you 
     }
 }
 </pre>
+
+### Handling erros
+All requests to the api return a status field. This can be checked in the php file of the class.
+The php class will throw an exception if an error has occurred.
+The format of an error json response is as follows
+<pre></pre>
+
+# Operations with Folders
+
+| Operation  | comments |
+| ------------- | ------------- |
+| ListFolders($code,$page)  |   |
+| FolderInfo($code)  |  |
+| CreateFolder($parentFolder,$name)  | Throws an error if the folder already exists |
 
 
 # Demo
