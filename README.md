@@ -21,7 +21,7 @@ After that, you can see API Keys on the same window in Configuration.
 ### Listing folders on root
 First parameter is folder id, second paramer is page number. Root folder is an special case, it has the zero code.
 <pre><code>$json=$objApi->ListFolders("0",1);</code></pre>
-The response is a json object that correspons to something like that:
+The response is a json object that corresponds to something like that:
 <pre>
     {
     "status": "ok",
@@ -79,7 +79,7 @@ Note that the parent folder is the root code for those folders. This allows you 
 }
 </pre>
 
-### Handling erros
+## Handling erros
 All requests to the api return a status field. You can check it in the php the class.
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
