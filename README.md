@@ -13,9 +13,11 @@ If you do not have a Dataprius account, go to the website, download and install 
 Once the application is installed. Go to the button in the lower left corner.
 - Click Start -> Configuration -> API Keys
 
-There you can request API keys. There is a activation process, Dataprius will you send an email when your request have been validated and your keys are available.
-After that you will see API Keys on the same window in Configuration.
+There you can request API keys. There is a activation process. Dataprius will send you an email when your request have been validated and your keys are available.
+After that, you can see API Keys on the same window in Configuration.
 
+### Create a connection
+<pre><code>$objApi = new DatapriusApi(API_CLIENT_ID_KEY,API_CLIENT_SECRET_KEY);</code></pre>
 
 
 
