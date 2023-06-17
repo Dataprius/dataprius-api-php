@@ -129,6 +129,16 @@ Forbidden chars in Windows
     * (asterisk)
 </pre>
 
+# Operations with Files
+
+| Operation  | comments |
+| ------------- | ------------- |
+| ListFiles($codeFolder,$page)  |   |
+| FileInfo($codeFile))  |  |
+| Upload($codeFolder,$localFilePath)  |  |
+| Download($codeFolder,$localFilePath)  |  |
+| FileRename($codeFile,$newName)  | Throws an error if a file with same name already exists. Forbidden chars in Windows are not allowed. |
+| FileDelete($codeFile)  | The file not permanently deleted. The file is send the recycle bin of the Dataprius account. |
 
 # Demo
 The demo folder contais a dirty implementation using the class. This demo is intended to show class methods in simple manner. In few time you can build a folders browser app allowing files and folders operations.
