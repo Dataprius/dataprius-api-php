@@ -1,0 +1,7 @@
+{
+    "name": "dataprius/dataprius-api-php",
+    "description": "Official PHP client for the Datapris API",
+    "require": {
+        "php": "^5.3 || ^7.0"
+    }
+}
