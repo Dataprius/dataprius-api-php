@@ -19,9 +19,9 @@ servers:
   - url: https://api.v2.dataprius.com
 components:
   securitySchemes:
-    noauthAuth:
+    basicAuth:
       type: http
-      scheme: noauth
+      scheme: basic
     oauth2Auth:
       type: http
       scheme: oauth2
@@ -49,13 +49,13 @@ paths:
 
 
         `curl --location --request POST
-        '`[`https://api.v2.dataprius.com/oauth/token`](https://api.v2.dataprius.com/oauth/token?grant_type=refresh_token&refresh_token=7f831847f762d847e115213408dd79cb603e015a')`-H
+        '`[`https://api.v2.dataprius.com/oauth/token`](https://api.v2.dataprius.com/oauth/token?grant_type=refresh_token&refresh_token=7f831847fd22d847e115213408dd79cb603e015a')`-H
         'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' -H
         'Authorization: Basic {{Authorization code}}'`
       requestBody:
         content: {}
       security:
-        - noauthAuth: []
+        - basicAuth: []
       parameters:
         - name: Content-Type
           in: header
@@ -68,7 +68,7 @@ paths:
             type: string
           example: >-
             Basic
-            MjUwZjBmYTakN2VlYzNid2QydDE6ZWJ3ZTA2NDcxZTliMDd0YTYyNWJkM2M4NDU5ZGZmN2YwZjc2MmNlYw==
+            MjUwZjBmYfskN2VlYzNiN2QyZDE6ZWJhdaA2NDcxZTliMDA0YT32NWJkM2M4NDU5ZGZmN2YwZjc2MmNlYw==
       responses:
         '200':
           description: OK
@@ -151,7 +151,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -230,7 +230,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -310,7 +310,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -392,7 +392,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -482,7 +482,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -571,7 +571,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -633,7 +633,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -703,7 +703,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -788,7 +788,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -856,7 +856,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -917,7 +917,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -994,7 +994,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
@@ -1062,7 +1062,7 @@ paths:
           in: header
           schema:
             type: string
-          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+          example: Bearer 196873sdf60dd322da24d87741e1b38d1b098c2
       responses:
         '200':
           description: OK
