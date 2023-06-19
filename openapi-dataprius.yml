@@ -1,0 +1,1114 @@
+openapi: 3.0.0
+info:
+  title: api.v2.dataprius
+  description: >-
+    Dataprius is a **Cloud Storage Solution for Business**. An **intranet to
+    share and work with documents**. It allows you to work with company files
+    without synchronizing, without conflicts, with multiple users connected at
+    the same time.
+
+
+    To use the Dataprius API you need to download and sign up a Dataprius
+    account [here](https://dataprius.com/en/downloads.html).
+
+
+    You can get more information about Dataprius or API and other applications
+    here: [https://dataprius.com.](https://dataprius.com.SetUpCreate)
+  version: 1.0.0
+servers:
+  - url: https://api.v2.dataprius.com
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    oauth2Auth:
+      type: http
+      scheme: oauth2
+security:
+  - oauth2Auth: []
+paths:
+  /oauth/token:
+    post:
+      tags:
+        - default
+      summary: Getting an access token
+      description: >-
+        **Getting an access token:**  
+
+        To get an access token you will need the account’s app_id and app_secret
+        credentials. You can get them from your Dataprius account configuration.
+
+
+        As is standard in basic access authentication, the header’s structure
+        corresponds to Authorization Basic credentials, where credentials is the
+        result of **base64(clientId + ":" + clientSecret)**
+
+
+        Example:
+
+
+        `curl --location --request POST
+        '`[`https://api.v2.dataprius.com/oauth/token`](https://api.v2.dataprius.com/oauth/token?grant_type=refresh_token&refresh_token=7f831847f762d847e115213408dd79cb603e015a')`-H
+        'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' -H
+        'Authorization: Basic {{Authorization code}}'`
+      requestBody:
+        content: {}
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded;charset=UTF-8
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Basic
+            MjUwZjBmYTakN2VlYzNid2QydDE6ZWJ3ZTA2NDcxZTliMDd0YTYyNWJkM2M4NDU5ZGZmN2YwZjc2MmNlYw==
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 08:52:24 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '60'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '59'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '1687164755'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '229'
+            ETag:
+              schema:
+                type: string
+                example: W/"e5-V9brS6ol62xI3rwn09A9xjgBZ1U"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  token_type: bearer
+                  created_at: 1687164745385
+                  access_token: 5ca08045f8c14be5288ef82f63234607d3ce2637
+                  refresh_token: b85d52c93764e6ba0102de1d0570e1bbaf083dad
+                  expires_in: 1687164752585
+                meta: null
+  /folders/list/0vpZeO:
+    get:
+      tags:
+        - default
+      summary: Folders list
+      description: >-
+        Returns the subfolders of the folder passed as a parameter. Use 0 to get
+        the the root folder.
+
+
+        **Params**:
+
+
+        - Page: 1 to maximum pages.
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:01:35 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '363'
+            ETag:
+              schema:
+                type: string
+                example: W/"16b-LBmRWNpX6bDwtXiZ9vI9BD6ujl0"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: X3lXnB
+                    Parent: 0vpZeO
+                    Name: Administration
+                    Path: FOLDERS/Administration
+                  - ID: D5Dz0G
+                    Parent: 0vpZeO
+                    Name: Commercial office
+                    Path: FOLDERS/Commercial office
+                  - ID: 6GlAKy
+                    Parent: 0vpZeO
+                    Name: Proyects
+                    Path: FOLDERS/Proyects
+                meta:
+                  pagination:
+                    total_pages: 1
+                    current_page: 1
+                    total_results: 3
+  /folders/files/0vpZeO:
+    get:
+      tags:
+        - default
+      summary: Files list
+      description: |-
+        Get files from a folder.
+
+        **Params**:
+
+        - Page: 1 to maximum pages.
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:19:28 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '322'
+            ETag:
+              schema:
+                type: string
+                example: W/"142-8F2DaaCVCIwJ3FWPVdZJ/UMLGg8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: WXbVZZ
+                    Folder: 0vpZeO
+                    Name: 01.PNG
+                  - ID: 1nVEy3
+                    Folder: 0vpZeO
+                    Name: cloud computing.xlsx
+                  - ID: QzpjPo
+                    Folder: 0vpZeO
+                    Name: Dossier.docx
+                  - ID: G2nn9o
+                    Folder: 0vpZeO
+                    Name: hello.txt
+                meta:
+                  pagination:
+                    total_pages: 1
+                    current_page: 1
+                    total_results: 4
+  /folders/info/6GlAKy:
+    get:
+      tags:
+        - default
+      summary: Folder Info
+      description: |-
+        Get folder information:
+
+        - ID
+        - Parent
+        - Name
+        - Path
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:19:43 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '112'
+            ETag:
+              schema:
+                type: string
+                example: W/"70-9X9HAF/XKQLZ78DYagl/IyG8oQw"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: 6GlAKy
+                    Parent: 0vpZeO
+                    Name: Proyects
+                    Path: FOLDERS/Proyects
+                meta: ''
+  /folders/getpath:
+    get:
+      tags:
+        - default
+      summary: Folders getpath
+      description: |-
+        Get folder information from the Path parameter.
+
+        **Params**:
+
+        - **Path**. A folder path to create. (Folders separated by / )
+            
+
+        **Returns:** The last folder information.
+
+        - ID
+        - Parent
+        - Name
+        - Path
+            
+
+        **Errors**:
+
+        - Invalid Path parameter. (Empty or undefined)
+        - Invalid chars in folder name. Not allowed | / : \* ? " < >
+        - Error getting path. Path does not exists.
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:20:22 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '112'
+            ETag:
+              schema:
+                type: string
+                example: W/"70-9X9HAF/XKQLZ78DYagl/IyG8oQw"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: 6GlAKy
+                    Parent: 0vpZeO
+                    Name: Proyects
+                    Path: FOLDERS/Proyects
+                meta: ''
+  /folders/create/0vpZeO:
+    post:
+      tags:
+        - default
+      summary: Folders create
+      description: |-
+        Create a subfolder.
+
+        **Params**:
+
+        - **Name**. Folder name.
+            
+
+        **Returns:** The created folder information.
+
+        - ID
+        - Parent
+        - Name
+        - Path
+            
+
+        **Errors:**
+
+        - Invalid param Name. (Empty or undefined)
+        - Invalid chars in folder name. Not allowed | / : \* ? " < >
+        - The folder already exists.
+        - Other causes.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Name: Billing
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:21:00 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '110'
+            ETag:
+              schema:
+                type: string
+                example: W/"6e-c897AHdhj2SwWtgzJ8j4OoY24po"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: xWOB8W
+                    Parent: 0vpZeO
+                    Name: Billing
+                    Path: FOLDERS/Billing
+                meta: ''
+  /folders/createpath:
+    post:
+      tags:
+        - default
+      summary: Folders createpath
+      description: |-
+        Creates all the folders of a path given as a parameter.
+
+        **Params**:
+
+        - **Path**. A folder path to create. (Folders separated by / )
+            
+
+        **Returns** the last folder information:
+
+        - ID
+        - Parent
+        - Name
+        - Path
+            
+
+        **Errors**:
+
+        - Invalid header param Path. (Empty or undefined)
+        - Invalid chars in folder name. Not allowed | / : \* ? " < >
+        - Error creating path. Other causes.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Path: FOLDERS/Example/
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:21:18 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '110'
+            ETag:
+              schema:
+                type: string
+                example: W/"6e-AuI/6HKe9JOQyUOY54rguShM5AI"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: y6LOnJ
+                    Parent: 0vpZeO
+                    Name: Example
+                    Path: FOLDERS/Example
+                meta: ''
+  /folders/delete/y6LOnJ:
+    delete:
+      tags:
+        - default
+      summary: Folders delete
+      description: Delete folder
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:21:30 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '35'
+            ETag:
+              schema:
+                type: string
+                example: W/"23-Z54h5SV7J3q0FCmTxl6/QwaOTXk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data: ''
+                meta: ''
+  /folders/rename/D5Dz0G:
+    patch:
+      tags:
+        - default
+      summary: Folder rename
+      description: |-
+        Rename a folder.
+
+        **Params**:
+
+        - NewName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                NewName: Commercial office 2
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:22:01 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '134'
+            ETag:
+              schema:
+                type: string
+                example: W/"86-vvNcPQ1TPXC17+qpNR8Oos6bhbo"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  - ID: D5Dz0G
+                    Parent: 0vpZeO
+                    Name: Commercial office 2
+                    Path: FOLDERS/Commercial office 2
+                meta: ''
+  /files/upload:
+    post:
+      tags:
+        - default
+      summary: Files upload
+      description: |-
+        Returns ID and info from de path
+
+        **Params**:
+
+        - IDFolder.
+        - file
+            
+
+        **Returns**:
+
+        - New file information.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                IDFolder:
+                  type: string
+                  example: 0vpZeO
+                file:
+                  type: string
+                  format: binary
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:22:24 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '88'
+            ETag:
+              schema:
+                type: string
+                example: W/"58-DviH8tNifYjUDBs0Qim3nHl5l2o"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  ID: QzpjPo
+                  Folder: 0vpZeO
+                  Name: Dossier.docx
+                meta: ''
+  /files/info/WXbVZZ:
+    get:
+      tags:
+        - default
+      summary: Files Info
+      description: |-
+        Get file information
+
+        **Returns:**
+
+        - ID
+        - Folder
+        - Name
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:22:34 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '82'
+            ETag:
+              schema:
+                type: string
+                example: W/"52-+KIWYvbHZCEKxtXShstMW40qEnQ"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  ID: WXbVZZ
+                  Folder: 0vpZeO
+                  Name: 01.PNG
+                meta: ''
+  /files/delete/QzpjPo:
+    delete:
+      tags:
+        - default
+      summary: File delete
+      description: Delete file.
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:23:02 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '35'
+            ETag:
+              schema:
+                type: string
+                example: W/"23-Z54h5SV7J3q0FCmTxl6/QwaOTXk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data: ''
+                meta: ''
+  /files/rename/1nVEy3:
+    patch:
+      tags:
+        - default
+      summary: File rename
+      description: |-
+        Rename a file.
+
+        **Params**:
+
+        - NewName
+            
+
+        **Errors:**
+
+        - Invalid value for id file
+        - This id file does not exist or was deleted
+        - Error renaming file
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                NewName: cloud computing v2.xlsx
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:23:30 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '96'
+            ETag:
+              schema:
+                type: string
+                example: W/"60-7sXxpVsxOfRDBZ/TDGqyfKl8JWk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: ok
+                data:
+                  ID: 1nVEy3
+                  Folder: 0vpZeO
+                  Name: cloud computing.xlsx
+                meta: ''
+  /files/download/G2nn9o:
+    get:
+      tags:
+        - default
+      summary: File download
+      description: |-
+        Download a file.
+
+        **Errors**:
+
+        - Invalid value for id file
+        - This id file does not exist or was deleted
+        - Error downloading file
+      security:
+        - oauth2Auth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer 19687351b60js322d62ase87741e1b38d1b098c2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Mon, 19 Jun 2023 09:24:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache/2.4.56 (Debian)
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Content-disposition:
+              schema:
+                type: string
+                example: attachment; filename=hello.txt
+            Content-type:
+              schema:
+                type: string
+                example: text/plain
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '34'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: 'hello world!! '
