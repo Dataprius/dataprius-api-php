@@ -31,7 +31,7 @@ paths:
   /oauth/token:
     post:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Getting an access token
       description: >-
         **Getting an access token:**  
@@ -133,7 +133,7 @@ paths:
   /folders/list/0vpZeO:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folders list
       description: >-
         Returns the subfolders of the folder passed as a parameter. Use 0 to get
@@ -215,7 +215,7 @@ paths:
   /folders/files/0vpZeO:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Files list
       description: |-
         Get files from a folder.
@@ -294,7 +294,7 @@ paths:
   /folders/info/6GlAKy:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folder Info
       description: |-
         Get folder information:
@@ -362,7 +362,7 @@ paths:
   /folders/getpath:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folders getpath
       description: |-
         Get folder information from the Path parameter.
@@ -444,7 +444,7 @@ paths:
   /folders/create/0vpZeO:
     post:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folders create
       description: |-
         Create a subfolder.
@@ -534,7 +534,7 @@ paths:
   /folders/createpath:
     post:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folders createpath
       description: |-
         Creates all the folders of a path given as a parameter.
@@ -623,7 +623,7 @@ paths:
   /folders/delete/y6LOnJ:
     delete:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folders delete
       description: Delete folder
       security:
@@ -681,7 +681,7 @@ paths:
   /folders/rename/D5Dz0G:
     patch:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Folder rename
       description: |-
         Rename a folder.
@@ -755,7 +755,7 @@ paths:
   /files/upload:
     post:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Files upload
       description: |-
         Returns ID and info from de path
@@ -839,7 +839,7 @@ paths:
   /files/info/WXbVZZ:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: Files Info
       description: |-
         Get file information
@@ -907,7 +907,7 @@ paths:
   /files/delete/QzpjPo:
     delete:
       tags:
-        - default
+        - api.v2.dataprius
       summary: File delete
       description: Delete file.
       security:
@@ -965,7 +965,7 @@ paths:
   /files/rename/1nVEy3:
     patch:
       tags:
-        - default
+        - api.v2.dataprius
       summary: File rename
       description: |-
         Rename a file.
@@ -1045,7 +1045,7 @@ paths:
   /files/download/G2nn9o:
     get:
       tags:
-        - default
+        - api.v2.dataprius
       summary: File download
       description: |-
         Download a file.
