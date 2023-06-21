@@ -42,7 +42,7 @@ The response is a json object that corresponds to something like that:
     "meta": {
         "pagination": {
             "total_pages": 1,
-            "current_page": "1",
+            "current_page": 1,
             "total_results": 2
         }
     }
@@ -72,7 +72,7 @@ Note that the parent folder is the root code for those folders. This allows you 
     "meta": {
         "pagination": {
             "total_pages": 1,
-            "current_page": "1",
+            "current_page": 1,
             "total_results": 2
         }
     }
