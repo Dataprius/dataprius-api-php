@@ -79,7 +79,7 @@ Note that the parent folder is the root code for those folders. This allows you 
 }
 </pre>
 
-## Handling erros
+## Handling errors
 All requests to the api return a status field. You can check it in the php the class.
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
