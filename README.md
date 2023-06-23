@@ -83,7 +83,18 @@ Note that the parent folder is the root code for those folders. This allows you 
 All requests to the api return a status field. You can check it in the php the class.
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
-<pre>{"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `MyFolder`. The folder already exists."}}</pre>
+<pre>
+    {
+        "status":"error",
+        "data":null,
+        "error":
+            {
+                "code":400,
+                "error_type":"FOLDER_EXISTS",
+                "message":"Error creating folder: `MyFolder`. The folder already exists."
+            }
+    }
+</pre>
 For example, you can get error information from an **Exception**.
 <pre><code>
 try
@@ -101,7 +112,16 @@ catch(Exception $e)
 Displays something like that:
 <pre>
     <b>This is the exception Message:</b>    
-    {"status":"error","data":null,"error":{"code":400,"error_type":"FOLDER_EXISTS","message":"Error creating folder: `MyFolder`. The folder already exists."}}
+    {
+        "status":"error",
+        "data":null,
+        "error":
+            {
+                "code":400,
+                "error_type":"FOLDER_EXISTS",
+                "message":"Error creating folder: `MyFolder`. The folder already exists."
+            }
+    }
     <b>This is the Json response message:</b>
     Error creating folder: `MyFolder`. The folder already exists. 
 </pre>
