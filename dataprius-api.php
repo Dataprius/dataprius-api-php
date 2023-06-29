@@ -40,16 +40,11 @@ class DatapriusApi
 		{
 			$jsonRequest=$this->AuthRequest();
 			$obj=json_decode($jsonRequest);
-
-			if ($obj->status != "ok")
-			{
-				echo("Api login Error");
-				throw new Exception("Login Error");
-			}
-			$this->bearerToken=$obj->data->access_token;
+			$this->bearerToken=$obj->access_token;
 		}
 		catch (Exception $e)
 		{
+			echo("Api login Error");
 			throw new Exception($e->getMessage());
 		}
 	}
@@ -63,18 +58,11 @@ class DatapriusApi
 		try
 		{
 			$json = json_decode($this->ApiRequest($pathURL,"GET"));
-
-			if($json->status=="ok")
-			{
-				return $json->data[0];
-			}
-			else
-			{
-				throw new Exception($json);
-			}
+			return $json->data[0];
 		}
 		catch (Exception $e)
 		{
+			echo("Api FolderInfo Error");
 			throw $e;
 		}
 	}
@@ -89,6 +77,7 @@ class DatapriusApi
 		}
 		catch (Exception $e)
 		{
+			echo("Api ListRootFolders Error");
 			throw $e;
 		}
 	}
@@ -101,18 +90,11 @@ class DatapriusApi
 		{
 			$data=array('Page' => "$page");
 			$json = json_decode($this->ApiRequest($pathURL,"POST",$data));
-
-			if($json->status=="ok")
-			{
-				return $json;
-			}
-			else
-			{
-				throw new Exception($json);
-			}
+			return $json;
 		}
 		catch (Exception $e)
 		{
+			echo("Api ListFolders Error");
 			throw $e;
 		}
 	}
@@ -125,10 +107,11 @@ class DatapriusApi
 		{
 			$data=array('Name' => $name);
 			$json = json_decode($this->ApiRequest($pathURL,"POST",$data));
-			return ($json->status)=="ok";
+			return true;
 		}
 		catch (Exception $e)
 		{
+			echo("Api CreateFolder Error");
 			throw $e;
 		}
 	}
@@ -141,11 +124,11 @@ class DatapriusApi
 		{
 			$data=array('NewName' => $newName);
 			$json = json_decode($this->ApiRequest($pathURL,"PATCH",$data));
-
-			return ($json->status)=="ok";
+			return true;
 		}
 		catch (Exception $e)
 		{
+			echo("Api FolderRename Error");
 			throw $e;
 		}
 	}
@@ -162,6 +145,7 @@ class DatapriusApi
 		}
 		catch (Exception $e)
 		{
+			echo("Api FolderDelete Error");
 			throw $e;
 		}
 	}
@@ -174,18 +158,11 @@ class DatapriusApi
 		{
 			$data=array('Page' => "$page");
 			$json = json_decode($this->ApiRequest($pathURL,"POST",$data));
-
-			if($json->status=="ok")
-			{
-				return $json;
-			}
-			else
-			{
-				throw new Exception($json);
-			}
+			return $json;
 		}
 		catch (Exception $e)
 		{
+			echo("Api ListFiles Error");
 			throw $e;
 		}
 	}
@@ -200,18 +177,11 @@ class DatapriusApi
 		try
 		{
 			$json = json_decode($this->ApiRequest($pathURL,"GET"));
-
-			if($json->status=="ok")
-			{
-				return $json->data;
-			}
-			else
-			{
-				throw new Exception($json);
-			}
+			return $json->data;
 		}
 		catch (Exception $e)
 		{
+			echo("Api FileInfo Error");
 			throw $e;
 		}
 	}
@@ -223,11 +193,11 @@ class DatapriusApi
 		try
 		{
 			$json = json_decode($this->ApiRequest($pathURL,"DELETE"));
-			return ($json->status)=="ok";
-
+			return true;
 		}
 		catch (Exception $e)
 		{
+			echo("Api FileDelete Error");
 			throw $e;
 		}
 	}
@@ -240,11 +210,11 @@ class DatapriusApi
 		{
 			$data=array('NewName' => $newName);
 			$json = json_decode($this->ApiRequest($pathURL,"PATCH",$data));
-
-			return ($json->status)=="ok";
+			return true;
 		}
 		catch (Exception $e)
 		{
+			echo("Api FileRename Error");
 			throw $e;
 		}
 	}
@@ -285,11 +255,10 @@ class DatapriusApi
 	private function AuthRequest()
 	{
 		$authBasic = base64_encode($this->clientId . ":" . $this->clientSecret);
-		//echo $authBasic;
 
 		$curl = curl_init( $this->endPoint . self::AUTH_URL );
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POST, false);
 		curl_setopt($curl, CURLOPT_HEADER,'Content-Type: application/x-www-form-urlencoded;charset=UTF-8');
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $authBasic));
 
@@ -334,8 +303,8 @@ class DatapriusApi
 			$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 			curl_close($curl);
 
-
-			if($httpCode==200)
+			// 200: OK, 201: Created, 202: Accepted, 204: No Content
+			if($httpCode==200 || $httpCode==201 || $httpCode==202 || $httpCode==204)
 			{
 				return $response;
 			}
@@ -409,9 +378,14 @@ class DatapriusApi
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION,true);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->bearerToken));
+		curl_setopt($curl, CURLOPT_HTTPHEADER, [
+			"Accept: application/octet-stream, application/json",
+			"Authorization: Bearer " . $this->bearerToken
+		  ]);
 
 		$response = curl_exec($curl);
+		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		
 		curl_close($curl);
 
 		if($httpCode==200)
