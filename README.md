@@ -24,7 +24,6 @@ First parameter is folder id, second paramer is page number. Root folder is an s
 The response is a json object that corresponds to something like that:
 <pre>
     {
-    "status": "ok",
     "data": [
         {
             "ID": "X3lXnB",
@@ -54,7 +53,6 @@ First parameter is folder id, second paramer is page number.
 Note that the parent folder is the root code for those folders. This allows you to implement the folder tree by making requests to subfolders.
 <pre>
     {
-    "status": "ok",
     "data": [
         {
             "ID": "gLw847",
@@ -80,19 +78,15 @@ Note that the parent folder is the root code for those folders. This allows you 
 </pre>
 
 ## Handling errors
-All requests to the api return a status field. You can check it in the php the class.
+All requests to the api return an stantdard error response.
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
 <pre>
     {
-        "status":"error",
-        "data":null,
-        "error":
-            {
-                "code":400,
-                "error_type":"FOLDER_EXISTS",
-                "message":"Error creating folder: `MyFolder`. The folder already exists."
-            }
+        "error": {
+            "error_code":"FOLDER_EXISTS",
+            "error_message":"Error creating folder: `MyFolder`. The folder already exists."
+        }
     }
 </pre>
 For example, you can get error information from an **Exception**.
@@ -113,14 +107,10 @@ Displays something like that:
 <pre>
     <b>This is the exception Message:</b>    
     {
-        "status":"error",
-        "data":null,
-        "error":
-            {
-                "code":400,
-                "error_type":"FOLDER_EXISTS",
-                "message":"Error creating folder: `MyFolder`. The folder already exists."
-            }
+        "error": {
+            "error_code":"FOLDER_EXISTS",
+            "error_message":"Error creating folder: `MyFolder`. The folder already exists."
+        }
     }
     <b>This is the Json response message:</b>
     Error creating folder: `MyFolder`. The folder already exists. 
