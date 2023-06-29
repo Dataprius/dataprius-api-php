@@ -78,7 +78,7 @@ Note that the parent folder is the root code for those folders. This allows you 
 </pre>
 
 ## Handling errors
-All requests to the api return an stantdard error response.
+All requests to the api return an standard error response.
 The php class will throw an exception if an error has occurred.
 The internal format of an error json response is as follows
 <pre>
