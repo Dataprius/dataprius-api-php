@@ -34,9 +34,20 @@ $objApi = new DatapriusApi(API_CLIENT_ID,API_CLIENT_SECRET);
 						
 				$codeFolder=$_REQUEST["Folder"];				
 				$name=htmlspecialchars($_REQUEST["FolderName"]);
+				$okCreated=false;
 				
-				$okCreated=$objApi->CreateFolder($codeFolder,$name);
-				//$res=json_decode($jsonRes);
+				try
+				{
+					$okCreated=$objApi->CreateFolder($codeFolder,$name);
+				}
+				catch(Exception $e)
+				{
+					// Example retrieving error info.					
+					echo "This is the exception Message:" . $e->getMessage() . "<br>"; 
+					$json=json_decode($e->getMessage());
+					echo "This is the Json response message: " . $json->error->message;
+				}
+				
 				$title = ($okCreated) ? "Folder Created." : "The folder already exists.";
 				
 				?>
@@ -164,13 +175,13 @@ $objApi = new DatapriusApi(API_CLIENT_ID,API_CLIENT_SECRET);
 					$onLocalPath=true;	
 				}
 				
-				$status = "error";
+				$isOK = false;
 				
 				if($onLocalPath)
 				{
 					$jsonResponse = $objApi->Upload($codeFolder,$targetFile);
-					$status = $jsonResponse->status;
-					if($status=="ok")
+					$isOK = ($jsonResponse->data != undefined);
+					if($isOK)
 					{
 						$data=$jsonResponse->data;
 					}
@@ -179,8 +190,8 @@ $objApi = new DatapriusApi(API_CLIENT_ID,API_CLIENT_SECRET);
 				?>
 				<div class=" centercontent graybox">
 					<h1 class="title">Upload File</h1><br>
-					<p class="nomtext"><?php echo ($status=="ok")? "File uploaded successfully":"Failed to upload file"; ?></p>
-					<p class="nomtext"><?php echo ($status=="ok")? $data->Name : ""; ?></p>
+					<p class="nomtext"><?php echo ($isOK)? "File uploaded successfully":"Failed to upload file"; ?></p>
+					<p class="nomtext"><?php echo ($isOK)? $data->Name : ""; ?></p>
 					<br><br>
 					<a href="index.php?Folder=<?php echo $codeFolder?>" class="button">Go Back</a>
 				</div>				
@@ -189,9 +200,8 @@ $objApi = new DatapriusApi(API_CLIENT_ID,API_CLIENT_SECRET);
 			
 		}//switch	
 	?>
-		
 	</div>
 </div>
 
 </body>
-</html> 
+</html>
