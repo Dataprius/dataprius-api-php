@@ -23,7 +23,7 @@ First parameter is folder id, second paramer is page number. Root folder is an s
 <pre><code>$json=$objApi->ListFolders("0",1);</code></pre>
 The response is a json object that corresponds to something like that:
 <pre>
-    {
+{
     "data": [
         {
             "ID": "X3lXnB",
@@ -52,7 +52,7 @@ First parameter is folder id, second paramer is page number.
 <pre><code>$json=$objApi->ListFolders("X3lXnB",1);</code></pre>
 Note that the parent folder is the root code for those folders. This allows you to implement the folder tree by making requests to subfolders.
 <pre>
-    {
+{
     "data": [
         {
             "ID": "gLw847",
