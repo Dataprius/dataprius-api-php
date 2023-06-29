@@ -100,7 +100,7 @@ catch(Exception $e)
     // Example getting error info.					
     echo "This is the exception Message:" . $e->getMessage() . "<br>";
     $json=json_decode($e->getMessage());
-    echo "This is the Json response message: " . $json->error->message;
+    echo "This is the Json response message: " . $json->error->error_message;
 }    
 </code></pre>
 Displays something like that:
