@@ -156,4 +156,5 @@ The demo folder contais a dirty implementation using the class. This demo is int
 [Dataprius downloads in english]: <https://dataprius.com/en/downloads>
 [Dataprius downloads in spanish]: <https://dataprius.com/descargas>
 
+![image](https://github.com/Dataprius/dataprius-api-php/assets/125915330/c22f0588-554d-4b1d-ab81-9d3c600c1b36)
 
