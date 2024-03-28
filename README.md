@@ -58,13 +58,17 @@ Note that the parent folder is the root code for those folders. This allows you 
             "ID": "gLw847",
             "Parent": "X3lXnB",
             "Name": "Invoices",
-            "Path": "Administration/Invoices"
+            "Path": "Administration/Invoices",
+            "Created": "2024-01-17T17:43:46.000Z",
+            "Modified": "2024-03-25T12:31:16.000Z"
         },       
         {
             "ID": "aZ3ghk",
             "Parent": "X3lXnB",
             "Name": "Shared documents with group",
-            "Path": "Administration/Shared documents with group"
+            "Path": "Administration/Shared documents with group",
+            "Created": "2023-01-17T17:43:46.000Z",
+            "Modified": "2024-01-25T12:31:16.000Z"
         }
     ],
     "meta": {
