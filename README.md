@@ -29,13 +29,17 @@ The response is a json object that corresponds to something like that:
             "ID": "X3lXnB",
             "Parent": "0",
             "Name": "Administration",
-            "Path": "Administration"
+            "Path": "Administration",
+            "Created": "2024-01-17T17:43:46.000Z",
+            "Modified": "2024-03-25T12:31:16.000Z"
         },       
         {
             "ID": "6GlAKy",
             "Parent": "0",
             "Name": "Proyects",
-            "Path": "Proyects"
+            "Path": "Proyects",
+            "Created": "2024-01-17T17:43:46.000Z",
+            "Modified": "2024-03-25T12:31:16.000Z"
         }
     ],
     "meta": {
